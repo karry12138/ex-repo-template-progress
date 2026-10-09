@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REPRODUCE</title>
+<style>:root { --bg:#f7f8fa; --panel:#fff; --accent:#3b6ea5; --accent2:#2f8f83; --text:#1f2430; --muted:#66707e; --border:#e3e6ea; --code-bg:#f0f2f5; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:16px; line-height:1.75; }
+.wrap { max-width:920px; margin:0 auto; padding:24px 28px 80px; }
+.topbar { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 28px; }
+.topbar-inner { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); }
+.br { background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px; font-weight:600; }
+article { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 40px; margin-top:24px; box-shadow:0 2px 12px rgba(0,0,0,.04); }
+h1,h2,h3,h4 { color:var(--text); line-height:1.4; }
+h1 { font-size:30px; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-top:10px; }
+h2 { font-size:23px; margin-top:40px; border-left:4px solid var(--accent); padding-left:12px; }
+h3 { font-size:19px; margin-top:28px; color:var(--accent2); }
+p { margin:12px 0; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-family:"SF Mono","JetBrains Mono",Consolas,monospace; font-size:.9em; }
+pre { background:#1e1f24; color:#e6e6e6; padding:14px 16px; border-radius:8px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+pre code { background:transparent; padding:0; color:inherit; font-size:1em; }
+blockquote { border-left:4px solid var(--border); margin:16px 0; padding:4px 16px; color:var(--muted); background:#fafbfc; border-radius:0 8px 8px 0; }
+table { border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px; }
+th,td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+th { background:#eef2f7; font-weight:600; }
+tr:nth-child(even) { background:#fafbfc; }
+ul,ol { margin:8px 0; padding-left:26px; }
+li { margin:4px 0; }
+.toc { background:#f0f4f9; border:1px solid var(--border); border-radius:10px; padding:16px 22px; margin:22px 0; }
+.toc strong { display:block; margin-bottom:8px; color:var(--accent); }
+.toc ul { list-style:none; padding-left:0; }
+.toc li { margin:3px 0; }
+.toc .l2 { padding-left:18px; font-size:.95em; }
+.toc .l3 { padding-left:36px; font-size:.9em; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+.footer { text-align:center; color:var(--muted); font-size:13px; margin-top:40px; }
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>REPRODUCE</span></div></div>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#最短时间复现指南-repo-name">最短时间复现指南（&lt;repo-name&gt;）</a></li><li class="l2"><a href="#目录结构">目录结构</a></li><li class="l2"><a href="#新机器-5-分钟就绪">新机器 5 分钟就绪</a></li><li class="l2"><a href="#复现命令-最短">复现命令（最短）</a></li><li class="l2"><a href="#两套环境说明">两套环境说明</a></li><li class="l2"><a href="#已完成结果-可直接对照-不必重跑">已完成结果（可直接对照，不必重跑）</a></li><li class="l2"><a href="#注意">注意</a></li></ul></div><h1>最短时间复现指南（<repo-name>）</h1>
+<p>本目录把实验相关资产整理成一份可迁移/可复现的包，涉及：</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>&lt;实验 A 描述&gt;（如：noFLA sweep）</td>
+</tr>
+<tr>
+<td>B</td>
+<td>&lt;实验 B 描述&gt;（如：FLA sweep）</td>
+</tr>
+<tr>
+<td>C</td>
+<td>&lt;实验 C 描述&gt;（如：带 adapter 的推理/消融）</td>
+</tr>
+<tr>
+<td>D</td>
+<td>&lt;实验 D 描述&gt;（如：不带 adapter 的基座串行）</td>
+</tr>
+<tr>
+<td>E</td>
+<td>两套环境：<code>venv-base</code>（有加速库）/ <code>venv-nofla</code>（硬挡加速库）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>本文件是模板。请把 <code>&lt;...&gt;</code> 占位符替换为你自己的实验内容与路径。</p>
+</blockquote>
+<h2>目录结构</h2>
+<pre><code>&lt;repo&gt;/
+  00_envs/           venv-base + venv-nofla(thin) + 依赖冻结
+  01_code/           &lt;SWEEP_PKG&gt; + &lt;MAIN_PKG&gt;(+ 测试脚本)
+  02_checkpoints/    &lt;ADAPTER_NAME&gt; adapter
+  03_data/data_index jsonl（full / traffic / conflict / train）
+  04_entrypoints/    check / run / pack / fixup
+  05_results/        已跑完的 报告 + JSON + base 结果
+  06_external_links/ 模型与影像的 symlink（或 full pack 实体）
+  work/              复现时写入 outputs/logs/reports（自动创建）
+  paths.env.example
+  docs/
+</code></pre>
+<h2>新机器 5 分钟就绪</h2>
+<pre><code class="language-bash"><span class="c1"># 1) 放到目标机</span>
+rsync<span class="w"> </span>-aP<span class="w"> </span>&lt;repo&gt;/<span class="w"> </span>NEWHOST:~/&lt;repo&gt;/
+
+<span class="c1"># 若要完全离线自包含（请按需调整体积）：</span>
+<span class="c1"># bash 04_entrypoints/pack_for_migration.sh --full --dest /media/usb/&lt;repo&gt;</span>
+
+<span class="c1"># 2) 进入目录</span>
+<span class="nb">cd</span><span class="w"> </span>~/&lt;repo&gt;
+cp<span class="w"> </span>paths.env.example<span class="w"> </span>paths.env<span class="w">   </span><span class="c1"># 必要改 MODEL / 影像路径</span>
+
+<span class="c1"># 3) 修正 venv-nofla -&gt; venv-base 链接</span>
+bash<span class="w"> </span>04_entrypoints/fixup_venvs.sh
+
+<span class="c1"># 4) 一键检查</span>
+bash<span class="w"> </span>04_entrypoints/check_all.sh
+</code></pre>
+<blockquote>
+<p>若数据索引（jsonl）里是绝对路径，迁移后需改 jsonl 或做目录映射（如把旧路径 symlink 到新位置）。</p>
+</blockquote>
+<h2>复现命令（最短）</h2>
+<pre><code class="language-bash">bash<span class="w"> </span>04_entrypoints/run_experiment.sh<span class="w">          </span><span class="c1"># 主流水线（模板内为 TODO）</span>
+<span class="nv">MAX_SAMPLES</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>bash<span class="w"> </span>04_entrypoints/run_smoke.sh<span class="w"> </span><span class="c1"># 小样本冒烟</span>
+</code></pre>
+<blockquote>
+<p>注：实际命令请替换 <code>04_entrypoints/</code> 下对应实验的 run_*.sh（见 docs/MANIFEST.md「入口对照」）。</p>
+</blockquote>
+<h2>两套环境说明</h2>
+<table>
+<thead>
+<tr>
+<th>Env</th>
+<th>路径</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>有加速库</strong></td>
+<td><code>00_envs/venv-base</code></td>
+<td>主要实验</td>
+</tr>
+<tr>
+<td><strong>无加速库</strong></td>
+<td><code>00_envs/venv-nofla</code></td>
+<td>基座串行；<code>sitecustomize.py</code> 对加速库直接 <code>ImportError</code>；python 指向 venv-base</td>
+</tr>
+</tbody>
+</table>
+<p>关键版本见 <code>00_envs/venv-base.key_versions.txt</code> 与 <code>venv-base.pip.freeze.txt</code>。</p>
+<h2>已完成结果（可直接对照，不必重跑）</h2>
+<ul>
+<li><code>05_results/&lt;RUN_TAG&gt;/</code>（JSON + 报告）</li>
+<li><code>05_results/&lt;COMBINED_REPORT&gt;</code></li>
+</ul>
+<h2>注意</h2>
+<ol>
+<li>统一脚本内可能有本机默认路径；entrypoint 会把 <code>EXP_ROOT</code> 指到 <code>work/</code> 并 symlink 代码/adapter/data。</li>
+<li>若脚本写死旧路径，以 <code>paths.env</code> 导出的环境变量为准（脚本使用 <code>${VAR:-...}</code> 或 export 覆盖）。若遇硬编码，改对应运行脚本顶部的路径块。</li>
+<li>换 GPU / 架构要重装对应编译的 wheel（如 <code>causal_conv1d</code>）。</li>
+</ol>
+</article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
+</body>
+</html>

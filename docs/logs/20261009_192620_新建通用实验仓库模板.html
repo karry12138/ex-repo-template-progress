@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20261009_192620_新建通用实验仓库模板</title>
+<style>:root { --bg:#f7f8fa; --panel:#fff; --accent:#3b6ea5; --accent2:#2f8f83; --text:#1f2430; --muted:#66707e; --border:#e3e6ea; --code-bg:#f0f2f5; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:16px; line-height:1.75; }
+.wrap { max-width:920px; margin:0 auto; padding:24px 28px 80px; }
+.topbar { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 28px; }
+.topbar-inner { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); }
+.br { background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px; font-weight:600; }
+article { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 40px; margin-top:24px; box-shadow:0 2px 12px rgba(0,0,0,.04); }
+h1,h2,h3,h4 { color:var(--text); line-height:1.4; }
+h1 { font-size:30px; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-top:10px; }
+h2 { font-size:23px; margin-top:40px; border-left:4px solid var(--accent); padding-left:12px; }
+h3 { font-size:19px; margin-top:28px; color:var(--accent2); }
+p { margin:12px 0; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-family:"SF Mono","JetBrains Mono",Consolas,monospace; font-size:.9em; }
+pre { background:#1e1f24; color:#e6e6e6; padding:14px 16px; border-radius:8px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+pre code { background:transparent; padding:0; color:inherit; font-size:1em; }
+blockquote { border-left:4px solid var(--border); margin:16px 0; padding:4px 16px; color:var(--muted); background:#fafbfc; border-radius:0 8px 8px 0; }
+table { border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px; }
+th,td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+th { background:#eef2f7; font-weight:600; }
+tr:nth-child(even) { background:#fafbfc; }
+ul,ol { margin:8px 0; padding-left:26px; }
+li { margin:4px 0; }
+.toc { background:#f0f4f9; border:1px solid var(--border); border-radius:10px; padding:16px 22px; margin:22px 0; }
+.toc strong { display:block; margin-bottom:8px; color:var(--accent); }
+.toc ul { list-style:none; padding-left:0; }
+.toc li { margin:3px 0; }
+.toc .l2 { padding-left:18px; font-size:.95em; }
+.toc .l3 { padding-left:36px; font-size:.9em; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+.footer { text-align:center; color:var(--muted); font-size:13px; margin-top:40px; }
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>20261009_192620_新建通用实验仓库模板</span></div></div>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#过程日志-2026-10-09-19-26-20-cst">过程日志：2026-10-09 19:26:20 CST</a></li><li class="l2"><a href="#1-本次做了什么-新建通用实验仓库模板-含进展跟踪">1. 本次做了什么：新建通用实验仓库模板（含进展跟踪）</a></li><li class="l2"><a href="#2-背景回顾">2. 背景回顾</a></li><li class="l2"><a href="#3-待办-下一步">3. 待办 / 下一步</a></li><li class="l2"><a href="#4-可复用的关键路径">4. 可复用的关键路径</a></li><li class="l2"><a href="#5-遗留-注意">5. 遗留 / 注意</a></li></ul></div><h1>过程日志：2026-10-09 19:26:20 CST</h1>
+<blockquote>
+<p>机制：每次推进追加一条 <code>docs/logs/时间戳_标题.md</code>，并同步覆盖 <code>docs/PROGRESS.md</code>。</p>
+</blockquote>
+<hr />
+<h2>1. 本次做了什么：新建通用实验仓库模板（含进展跟踪）</h2>
+<p>根据用户要求，在 <code>workspace-2dgx/qty/</code> 下新建 <code>ex-repo-template-progress</code>：</p>
+<ul>
+<li>拷贝 <code>dk-repo-template</code> 的可复现实验仓库骨架（<code>00_envs</code>…<code>06_external_links</code> + <code>04_entrypoints</code>）。</li>
+<li>嵌入 <code>dk-incre</code> 的「带时间戳的进展跟踪」机制：
+<ul>
+<li><code>docs/PROGRESS.md</code>（当前锚点）、<code>docs/logs/</code>（时间轴）、<code>docs/LOG_CONVENTION.md</code>（约定）；</li>
+<li><code>tools/md_to_html.py</code> + <code>tools/_html_style.css</code> + <code>tools/README.md</code>（md→html）。</li>
+</ul>
+</li>
+<li>清理骨架里的具体实验痕迹（<code>.ipynb_checkpoints</code>、<code>work/</code> 空目录）。</li>
+</ul>
+<h2>2. 背景回顾</h2>
+<ul>
+<li><code>dk-repo-template</code>：通用可复现实验仓库骨架，用 <code>paths.env</code> + <code>04_entrypoints/_common.sh</code> 统一解路径。</li>
+<li><code>dk-incre</code>：在该骨架基础上沉淀了「带时间戳的进展跟踪」与「md→html 阅读转换」两项工作流。</li>
+<li>本次把两者合并，产出可直接派生的通用模板。</li>
+</ul>
+<h2>3. 待办 / 下一步</h2>
+<ul>
+<li>[x] 骨架就绪 + 进展跟踪机制嵌入。</li>
+<li>[ ] （派生场景）<code>cp -a ex-repo-template-progress &lt;新仓库&gt;</code>，替换 <code>&lt;...&gt;</code> 占位符。</li>
+<li>[ ] 新仓库内 <code>bash 04_entrypoints/check_all.sh</code> 验证。</li>
+</ul>
+<h2>4. 可复用的关键路径</h2>
+<ul>
+<li>根目录 <code>README.md</code> · <code>docs/REPRODUCE.md</code> · <code>docs/MANIFEST.md</code></li>
+<li>进展 <code>docs/PROGRESS.md</code> · 约定 <code>docs/LOG_CONVENTION.md</code> · 时间轴 <code>docs/logs/</code></li>
+<li>工具 <code>tools/md_to_html.py</code>（依赖 markdown-it-py + pygments，dk-fla venv 已具备）</li>
+</ul>
+<h2>5. 遗留 / 注意</h2>
+<ul>
+<li>模板内 <code>&lt;...&gt;</code> 均为占位符，派生新仓库时替换。</li>
+<li><code>work/</code> 由 <code>04_entrypoints/_common.sh</code> 运行时自动重建。</li>
+</ul>
+</article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
+</body>
+</html>

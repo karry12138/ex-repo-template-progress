@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MANIFEST</title>
+<style>:root { --bg:#f7f8fa; --panel:#fff; --accent:#3b6ea5; --accent2:#2f8f83; --text:#1f2430; --muted:#66707e; --border:#e3e6ea; --code-bg:#f0f2f5; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:16px; line-height:1.75; }
+.wrap { max-width:920px; margin:0 auto; padding:24px 28px 80px; }
+.topbar { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 28px; }
+.topbar-inner { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); }
+.br { background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px; font-weight:600; }
+article { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 40px; margin-top:24px; box-shadow:0 2px 12px rgba(0,0,0,.04); }
+h1,h2,h3,h4 { color:var(--text); line-height:1.4; }
+h1 { font-size:30px; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-top:10px; }
+h2 { font-size:23px; margin-top:40px; border-left:4px solid var(--accent); padding-left:12px; }
+h3 { font-size:19px; margin-top:28px; color:var(--accent2); }
+p { margin:12px 0; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-family:"SF Mono","JetBrains Mono",Consolas,monospace; font-size:.9em; }
+pre { background:#1e1f24; color:#e6e6e6; padding:14px 16px; border-radius:8px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+pre code { background:transparent; padding:0; color:inherit; font-size:1em; }
+blockquote { border-left:4px solid var(--border); margin:16px 0; padding:4px 16px; color:var(--muted); background:#fafbfc; border-radius:0 8px 8px 0; }
+table { border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px; }
+th,td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+th { background:#eef2f7; font-weight:600; }
+tr:nth-child(even) { background:#fafbfc; }
+ul,ol { margin:8px 0; padding-left:26px; }
+li { margin:4px 0; }
+.toc { background:#f0f4f9; border:1px solid var(--border); border-radius:10px; padding:16px 22px; margin:22px 0; }
+.toc strong { display:block; margin-bottom:8px; color:var(--accent); }
+.toc ul { list-style:none; padding-left:0; }
+.toc li { margin:3px 0; }
+.toc .l2 { padding-left:18px; font-size:.95em; }
+.toc .l3 { padding-left:36px; font-size:.9em; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+.footer { text-align:center; color:var(--muted); font-size:13px; margin-top:40px; }
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>MANIFEST</span></div></div>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#资产清单-manifest">资产清单 MANIFEST</a></li><li class="l2"><a href="#已纳入-实体拷贝">已纳入（实体拷贝）</a></li><li class="l2"><a href="#外链-轻量包为-symlink-full-才拷贝">外链（轻量包为 symlink；`--full` 才拷贝）</a></li><li class="l2"><a href="#入口对照">入口对照</a></li><li class="l2"><a href="#官方-master-tag-结果">官方 master tag（结果）</a></li></ul></div><h1>资产清单 MANIFEST</h1>
+<p>生成时间：见包内文件 mtime。来源机：&lt;SOURCE_MACHINE&gt;。<repo-name> 收录了以下资产。</p>
+<h2>已纳入（实体拷贝）</h2>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>01_code/&lt;SWEEP_PKG&gt;/</code></td>
+<td>主 sweep / 报告脚本</td>
+</tr>
+<tr>
+<td><code>01_code/&lt;MAIN_PKG&gt;/</code></td>
+<td>主用途 + 测试入口</td>
+</tr>
+<tr>
+<td><code>02_checkpoints/&lt;ADAPTER_NAME&gt;/</code></td>
+<td>adapter</td>
+</tr>
+<tr>
+<td><code>03_data/data_index/*.jsonl</code></td>
+<td>full / traffic / conflict / train 索引</td>
+</tr>
+<tr>
+<td><code>00_envs/venv-nofla/</code></td>
+<td>无加速库薄环境（挡 import）</td>
+</tr>
+<tr>
+<td><code>00_envs/venv-base.pip.freeze.txt</code></td>
+<td>完整 pip freeze</td>
+</tr>
+<tr>
+<td><code>00_envs/venv-base.key_versions.txt</code></td>
+<td>关键包版本</td>
+</tr>
+<tr>
+<td><code>05_results/&lt;RUN_TAG&gt;/</code></td>
+<td>已跑完结果</td>
+</tr>
+<tr>
+<td><code>04_entrypoints/</code></td>
+<td>检查 / 复现 / 打包入口</td>
+</tr>
+</tbody>
+</table>
+<h2>外链（轻量包为 symlink；<code>--full</code> 才拷贝）</h2>
+<table>
+<thead>
+<tr>
+<th>链接</th>
+<th>源路径</th>
+<th>约大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>00_envs/venv-base</code></td>
+<td><code>&lt;ABS_VENV_BASE_PATH&gt;</code></td>
+<td>请填写</td>
+</tr>
+<tr>
+<td><code>06_external_links/&lt;MODEL_NAME&gt;</code></td>
+<td><code>&lt;ABS_MODEL_PATH&gt;</code></td>
+<td>请填写</td>
+</tr>
+<tr>
+<td><code>06_external_links/&lt;DATASET_TRAFFIC&gt;</code></td>
+<td><code>&lt;ABS_DATASET_TRAFFIC_PATH&gt;</code></td>
+<td>请填写</td>
+</tr>
+<tr>
+<td><code>06_external_links/&lt;DATASET_CONFLICT&gt;</code></td>
+<td><code>&lt;ABS_DATASET_CONFLICT_PATH&gt;</code></td>
+<td>请填写</td>
+</tr>
+</tbody>
+</table>
+<h2>入口对照</h2>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主实验</td>
+<td><code>04_entrypoints/run_experiment.sh</code></td>
+</tr>
+<tr>
+<td>冒烟</td>
+<td><code>04_entrypoints/run_smoke.sh</code></td>
+</tr>
+<tr>
+<td>环境检查</td>
+<td><code>04_entrypoints/check_all.sh</code></td>
+</tr>
+<tr>
+<td>迁移打包</td>
+<td><code>04_entrypoints/pack_for_migration.sh [--full]</code></td>
+</tr>
+</tbody>
+</table>
+<h2>官方 master tag（结果）</h2>
+<ul>
+<li>&lt;RUN_TAG_A&gt;</li>
+<li>&lt;RUN_TAG_B&gt;</li>
+</ul>
+</article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
+</body>
+</html>

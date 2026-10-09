@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>README</title>
+<style>:root { --bg:#f7f8fa; --panel:#fff; --accent:#3b6ea5; --accent2:#2f8f83; --text:#1f2430; --muted:#66707e; --border:#e3e6ea; --code-bg:#f0f2f5; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:16px; line-height:1.75; }
+.wrap { max-width:920px; margin:0 auto; padding:24px 28px 80px; }
+.topbar { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 28px; }
+.topbar-inner { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); }
+.br { background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px; font-weight:600; }
+article { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 40px; margin-top:24px; box-shadow:0 2px 12px rgba(0,0,0,.04); }
+h1,h2,h3,h4 { color:var(--text); line-height:1.4; }
+h1 { font-size:30px; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-top:10px; }
+h2 { font-size:23px; margin-top:40px; border-left:4px solid var(--accent); padding-left:12px; }
+h3 { font-size:19px; margin-top:28px; color:var(--accent2); }
+p { margin:12px 0; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-family:"SF Mono","JetBrains Mono",Consolas,monospace; font-size:.9em; }
+pre { background:#1e1f24; color:#e6e6e6; padding:14px 16px; border-radius:8px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+pre code { background:transparent; padding:0; color:inherit; font-size:1em; }
+blockquote { border-left:4px solid var(--border); margin:16px 0; padding:4px 16px; color:var(--muted); background:#fafbfc; border-radius:0 8px 8px 0; }
+table { border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px; }
+th,td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+th { background:#eef2f7; font-weight:600; }
+tr:nth-child(even) { background:#fafbfc; }
+ul,ol { margin:8px 0; padding-left:26px; }
+li { margin:4px 0; }
+.toc { background:#f0f4f9; border:1px solid var(--border); border-radius:10px; padding:16px 22px; margin:22px 0; }
+.toc strong { display:block; margin-bottom:8px; color:var(--accent); }
+.toc ul { list-style:none; padding-left:0; }
+.toc li { margin:3px 0; }
+.toc .l2 { padding-left:18px; font-size:.95em; }
+.toc .l3 { padding-left:36px; font-size:.9em; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+.footer { text-align:center; color:var(--muted); font-size:13px; margin-top:40px; }
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>README</span></div></div>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#通用实验仓库目录模板-ex-repo-template-progress">通用实验仓库目录模板（ex-repo-template-progress）</a></li><li class="l2"><a href="#目录结构">目录结构</a></li><li class="l2"><a href="#进展入口-每次打开先看这里">🧭 进展入口（每次打开先看这里）</a></li><li class="l2"><a href="#快速使用">快速使用</a></li><li class="l2"><a href="#内置的两项工作流">🆕 内置的两项工作流</a></li><li class="l3"><a href="#1-带时间戳的进展跟踪-解决-不记得上次在哪">1. 带时间戳的进展跟踪（解决「不记得上次在哪」）</a></li><li class="l3"><a href="#2-md-html-阅读转换-阅读更轻松-md-仍为执行依据">2. md→html 阅读转换（阅读更轻松，md 仍为执行依据）</a></li><li class="l2"><a href="#这套组织想解决的问题">这套组织想解决的问题</a></li><li class="l2"><a href="#约定">约定</a></li></ul></div><h1>通用实验仓库目录模板（ex-repo-template-progress）</h1>
+<p>本模板整理自 <code>dk-repo-template</code> 与 <code>dk-incre</code> 的实践：把「源码 / 数据索引 / 检查点 / 运行产物 / 环境 /
+外部重型资产」分层，并用 <code>paths.env</code> + <code>04_entrypoints/_common.sh</code> 统一解路径，使仓库可独立拷贝、迁移、
+并一键检查就绪。在此之上，<strong>内置了「带时间戳的进展跟踪」机制</strong>（来自 dk-incre），解决「不记得上次在哪」。</p>
+<h2>目录结构</h2>
+<pre><code>&lt;repo&gt;/
+  00_envs/            Python 环境（venv-base：含加速库；venv-nofla：硬挡加速库）
+  01_code/            源码仓（sweep 主包 + 主用途包）
+  02_checkpoints/     训练出的 adapter / checkpoint
+  03_data/data_index/ 数据索引 jsonl（full / traffic / conflict / train）
+  04_entrypoints/     检查 / 运行 / 打包 / 环境修复的入口脚本
+  05_results/         已完成实验的 JSON + 报告
+  06_external_links/  模型与影像等重型资产的 symlink（或实体）
+  work/               运行时的 outputs / logs / reports / tmp（自动创建）
+  docs/               说明文档 + PROGRESS + logs 时间戳 + LOG_CONVENTION
+  tools/              辅助工具（md→html 等）
+  paths.env.example   拷贝为 paths.env 并填写你的真实路径
+  .gitignore          只入库 源码+数据索引，不入库 产物/日志/缓存
+</code></pre>
+<p>每个编号目录顶层都带一段 <code>README.md</code> 说明「该放什么 / 该忽略什么」。</p>
+<h2>🧭 进展入口（每次打开先看这里）</h2>
+<ul>
+<li><strong><a href="docs/PROGRESS.md"><code>docs/PROGRESS.md</code></a></strong> —— 我在哪 / 上次做到哪 / 下一步从哪继续（当前锚点）。</li>
+<li><a href="docs/logs/"><code>docs/logs/</code></a> —— 带时间戳的过程日志（<code>YYYYMMDD_HHMMSS_标题.md</code>），保留完整时间轴。</li>
+<li>约定详见 <a href="docs/LOG_CONVENTION.md"><code>docs/LOG_CONVENTION.md</code></a>。</li>
+</ul>
+<blockquote>
+<p>约定：每次推进后更新 <code>docs/PROGRESS.md</code> 锚点，并新增一条 <code>docs/logs/</code> 时间戳记录。</p>
+</blockquote>
+<h2>快速使用</h2>
+<pre><code class="language-bash">cp<span class="w"> </span>paths.env.example<span class="w"> </span>paths.env<span class="w">   </span><span class="c1"># 按你的环境填 MODEL / 影像 / 环境路径</span>
+bash<span class="w"> </span>04_entrypoints/fixup_venvs.sh<span class="w">   </span><span class="c1"># 无加速环境 -&gt; 复用有加速环境（如需要）</span>
+bash<span class="w"> </span>04_entrypoints/check_all.sh<span class="w">     </span><span class="c1"># 一键检查资产是否就绪</span>
+bash<span class="w"> </span>04_entrypoints/run_experiment.sh<span class="w"> </span><span class="c1"># 运行主流水线（模板内为 TODO）</span>
+</code></pre>
+<h2>🆕 内置的两项工作流</h2>
+<h3>1. 带时间戳的进展跟踪（解决「不记得上次在哪」）</h3>
+<ul>
+<li><strong><a href="docs/PROGRESS.md"><code>docs/PROGRESS.md</code></a></strong>：当前锚点——「我在哪 / 上次做到哪 / 下一步从哪继续」，每次推进后覆盖更新。</li>
+<li><strong><code>docs/logs/YYYYMMDD_HHMMSS_标题.md</code></strong>：带时间戳的过程日志，保留完整时间轴；每条含「做了什么 / 背景回顾 / 待办下一步 / 可复用路径 / 遗留注意」。</li>
+<li>约定详见 <a href="docs/LOG_CONVENTION.md"><code>docs/LOG_CONVENTION.md</code></a>。</li>
+</ul>
+<blockquote>
+<p>目的：不用靠记忆，打开 <code>docs/PROGRESS.md</code> 就能无缝续接。</p>
+</blockquote>
+<h3>2. md→html 阅读转换（阅读更轻松，md 仍为执行依据）</h3>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>执行依据</strong></td>
+<td><code>*.md</code></td>
+<td>可 diff、版本管理、执行时参考</td>
+</tr>
+<tr>
+<td><strong>阅读用</strong></td>
+<td><code>*.html</code>（同名同目录）</td>
+<td>渲染后更轻松的阅读形式</td>
+</tr>
+</tbody>
+</table>
+<p>工具：<a href="tools/md_to_html.py"><code>tools/md_to_html.py</code></a>（用 <code>markdown-it</code> + <code>pygments</code>，带目录/代码高亮/响应式排版）。</p>
+<pre><code class="language-bash">python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>docs/PROGRESS.md<span class="w">   </span><span class="c1"># 转单个</span>
+python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>--all-docs<span class="w">         </span><span class="c1"># 转 docs/ 下所有 md</span>
+python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>README.md<span class="w">          </span><span class="c1"># 根目录 README</span>
+</code></pre>
+<blockquote>
+<p>约定：改 md 后重新生成 html，一起提交；html 是产物，不要手工编辑。</p>
+</blockquote>
+<h2>这套组织想解决的问题</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>模板的做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路径到处硬编码</td>
+<td>集中到 <code>paths.env</code>，脚本用 <code>${VAR:-...}</code> 兜底并统一 export</td>
+</tr>
+<tr>
+<td>重型资产（模型/影像/venv）拖垮仓库</td>
+<td>放进 <code>06_external_links</code> / <code>00_envs</code>，默认 symlink，可用 <code>--full</code> 实体打包</td>
+</tr>
+<tr>
+<td>运行产物污染 git</td>
+<td><code>.gitignore</code> 忽略 <code>outputs/logs/reports/tmp/lora_checkpoint</code></td>
+</tr>
+<tr>
+<td>换机后 venv 失效</td>
+<td><code>fixup_venvs.sh</code> 重写链接 + <code>sitecustomize.py</code> 硬挡部分包</td>
+</tr>
+<tr>
+<td>不知道缺什么</td>
+<td><code>check_all.sh</code> 逐项 <code>[OK]/[MISS]</code> 校验</td>
+</tr>
+<tr>
+<td>迁移/拷走要带哪些</td>
+<td><code>pack_for_migration.sh [--full]</code> 打包 + <code>docs/MANIFEST.md</code> 清单</td>
+</tr>
+<tr>
+<td>实验能否复现</td>
+<td><code>docs/REPRODUCE.md</code> 记录命令与预期产物</td>
+</tr>
+<tr>
+<td>不记得上次到哪</td>
+<td><strong><code>docs/PROGRESS.md</code> 锚点 + <code>docs/logs/</code> 时间轴</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>约定</h2>
+<ol>
+<li><code>paths.env.example</code> 是模板（可入库），<code>paths.env</code> 是本地实际配置（不入库，已列入 .gitignore）。</li>
+<li><code>04_entrypoints/_common.sh</code> 自动定位 <code>BUNDLE_ROOT</code>、source <code>paths.env</code>、并在 <code>work/</code> 里 symlink 好
+<code>adapter</code> / <code>data_index</code> / 代码包，供底层脚本以约定路径访问。</li>
+<li>仓库内 <code>&lt;...&gt;</code> 尖括号均为占位符，创建新仓库时替换为你的真实名字。</li>
+</ol>
+<p>详细说明：<a href="docs/REPRODUCE.md"><code>docs/REPRODUCE.md</code></a> · 资产清单：<a href="docs/MANIFEST.md"><code>docs/MANIFEST.md</code></a></p>
+</article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
+</body>
+</html>

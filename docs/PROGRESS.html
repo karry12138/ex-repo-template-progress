@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROGRESS</title>
+<style>:root { --bg:#f7f8fa; --panel:#fff; --accent:#3b6ea5; --accent2:#2f8f83; --text:#1f2430; --muted:#66707e; --border:#e3e6ea; --code-bg:#f0f2f5; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:16px; line-height:1.75; }
+.wrap { max-width:920px; margin:0 auto; padding:24px 28px 80px; }
+.topbar { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 28px; }
+.topbar-inner { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); }
+.br { background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px; font-weight:600; }
+article { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 40px; margin-top:24px; box-shadow:0 2px 12px rgba(0,0,0,.04); }
+h1,h2,h3,h4 { color:var(--text); line-height:1.4; }
+h1 { font-size:30px; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-top:10px; }
+h2 { font-size:23px; margin-top:40px; border-left:4px solid var(--accent); padding-left:12px; }
+h3 { font-size:19px; margin-top:28px; color:var(--accent2); }
+p { margin:12px 0; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-family:"SF Mono","JetBrains Mono",Consolas,monospace; font-size:.9em; }
+pre { background:#1e1f24; color:#e6e6e6; padding:14px 16px; border-radius:8px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+pre code { background:transparent; padding:0; color:inherit; font-size:1em; }
+blockquote { border-left:4px solid var(--border); margin:16px 0; padding:4px 16px; color:var(--muted); background:#fafbfc; border-radius:0 8px 8px 0; }
+table { border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px; }
+th,td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+th { background:#eef2f7; font-weight:600; }
+tr:nth-child(even) { background:#fafbfc; }
+ul,ol { margin:8px 0; padding-left:26px; }
+li { margin:4px 0; }
+.toc { background:#f0f4f9; border:1px solid var(--border); border-radius:10px; padding:16px 22px; margin:22px 0; }
+.toc strong { display:block; margin-bottom:8px; color:var(--accent); }
+.toc ul { list-style:none; padding-left:0; }
+.toc li { margin:3px 0; }
+.toc .l2 { padding-left:18px; font-size:.95em; }
+.toc .l3 { padding-left:36px; font-size:.9em; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+.footer { text-align:center; color:var(--muted); font-size:13px; margin-top:40px; }
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>PROGRESS</span></div></div>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#进展入口-progress-压缩版续接锚点">进展入口（PROGRESS）—— 压缩版续接锚点</a></li><li class="l2"><a href="#操作安全守则">⚠️ 操作安全守则</a></li><li class="l2"><a href="#当前-一句话">📍 当前（一句话）</a></li><li class="l2"><a href="#已完成">已完成</a></li><li class="l2"><a href="#下一步-从哪继续">⏭️ 下一步（从哪继续）</a></li><li class="l2"><a href="#关键路径">🧭 关键路径</a></li><li class="l2"><a href="#时间线-近期关键">🗒️ 时间线（近期关键）</a></li></ul></div><h1>进展入口（PROGRESS）—— 压缩版续接锚点</h1>
+<blockquote>
+<p><strong>每次打开先看这个。</strong> 只保留当前锚点；历史在 <code>docs/logs/</code>。</p>
+</blockquote>
+<h2>⚠️ 操作安全守则</h2>
+<blockquote>
+<p>需要 CUDA/大内存的实验：先停下、告诉用户、等释放算力再继续（曾因本地 VLLM 占满 GPU 阻塞）。</p>
+</blockquote>
+<h2>📍 当前（一句话）</h2>
+<blockquote>
+<p><strong>这是 <code>ex-repo-template-progress</code>（通用实验仓库模板 + 带时间戳进展跟踪）。骨架已就绪：可复现实验仓库目录已完成，并嵌入 <code>dk-incre</code> 的进展跟踪机制（<code>docs/PROGRESS.md</code> ← 本文件 + <code>docs/logs/YYYYMMDD_HHMMSS_标题.md</code> + <code>docs/LOG_CONVENTION.md</code> + <code>tools/md_to_html.py</code>）。下一步：从本骨架派生一个新实验仓库，替换 <code>&lt;...&gt;</code> 占位符。</strong></p>
+</blockquote>
+<h2>已完成</h2>
+<ul>
+<li>从 <code>dk-repo-template</code> 拷贝可复现实验仓库骨架（00_envs…work/docs）。</li>
+<li>嵌入进展跟踪机制：<code>docs/PROGRESS.md</code>（本锚点）、<code>docs/logs/</code>（时间轴）、<code>docs/LOG_CONVENTION.md</code>（约定）、<code>tools/md_to_html.py</code> + <code>tools/_html_style.css</code>（md→html）。</li>
+<li>清理骨架里的具体实验痕迹（.ipynb_checkpoints、work 空目录）。</li>
+</ul>
+<h2>⏭️ 下一步（从哪继续）</h2>
+<ul>
+<li>[ ] 用本模板 <code>cp -a ex-repo-template-progress &lt;新仓库&gt;</code> 派生新实验仓库。</li>
+<li>[ ] 新仓库内：改 <code>README.md</code> / <code>paths.env.example</code> / <code>docs/REPRODUCE.md</code> / <code>docs/MANIFEST.md</code> 的 <code>&lt;...&gt;</code> 占位符。</li>
+<li>[ ] <code>cp paths.env.example paths.env</code> 填本机实际路径 → <code>bash 04_entrypoints/check_all.sh</code> 验证。</li>
+</ul>
+<h2>🧭 关键路径</h2>
+<ul>
+<li>骨架 <code>README.md</code> · 复现 <code>docs/REPRODUCE.md</code> · 清单 <code>docs/MANIFEST.md</code></li>
+<li>进展约定 <code>docs/LOG_CONVENTION.md</code> · 当前锚点 <code>docs/PROGRESS.md</code>（本文件）· 时间轴 <code>docs/logs/</code></li>
+<li>工具 <code>tools/md_to_html.py</code>（md→html）· 入口 <code>04_entrypoints/</code></li>
+</ul>
+<h2>🗒️ 时间线（近期关键）</h2>
+<ul>
+<li>模板创建：骨架就绪 + 进展跟踪机制嵌入。</li>
+</ul>
+</article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+# ==========================================================================
+#  <repo-name>  .gitignore
+#  原则：只入库「源码 + 数据索引 + 进展文档」，不入库「训练产物 / 运行日志 / 缓存/环境」
+#  （继承自 dk-experiment-reproduce / dk-multi / dk-incre 兄弟项目的约定）
+# ==========================================================================
+
+# ---- 运行工作区（_common.sh 自动创建并 symlink adapter/data/代码）----
+# 具体运行时生成目录/链接统一忽略，但保留 work/README.md
+work/outputs/
+work/logs/
+work/reports/
+work/tmp/
+work/data_index/
+work/lora_checkpoint/
+work/*
+!work/README.md
+
+# ---- 本地实际配置（保留模板 paths.env.example，不入库 paths.env）----
+paths.env
+!paths.env.example
+
+# ---- 环境（venv 通常不入库，仅保留符号链接/冻结清单）----
+venv/
+.venv/
+env/
+00_envs/venv-base
+00_envs/venv-base/
+
+# ---- 重型外部资产（模型/影像，通常 symlink）----
+06_external_links/*
+!06_external_links/README.md
+
+# ---- 训练产物 / 检查点（大、可重生成）----
+lora_checkpoint/
+
+# ---- Jupyter 自动备份 ----
+.ipynb_checkpoints/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ---- 本地/私有配置（如需保留模板，请改用 *.example）----
+.env
+.env.*
+!.env.example

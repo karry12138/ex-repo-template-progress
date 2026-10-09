@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>README</title>
+<style>:root { --bg:#f7f8fa; --panel:#fff; --accent:#3b6ea5; --accent2:#2f8f83; --text:#1f2430; --muted:#66707e; --border:#e3e6ea; --code-bg:#f0f2f5; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; font-size:16px; line-height:1.75; }
+.wrap { max-width:920px; margin:0 auto; padding:24px 28px 80px; }
+.topbar { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 28px; }
+.topbar-inner { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted); }
+.br { background:var(--accent); color:#fff; padding:2px 10px; border-radius:12px; font-weight:600; }
+article { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:32px 40px; margin-top:24px; box-shadow:0 2px 12px rgba(0,0,0,.04); }
+h1,h2,h3,h4 { color:var(--text); line-height:1.4; }
+h1 { font-size:30px; border-bottom:2px solid var(--accent); padding-bottom:10px; margin-top:10px; }
+h2 { font-size:23px; margin-top:40px; border-left:4px solid var(--accent); padding-left:12px; }
+h3 { font-size:19px; margin-top:28px; color:var(--accent2); }
+p { margin:12px 0; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-family:"SF Mono","JetBrains Mono",Consolas,monospace; font-size:.9em; }
+pre { background:#1e1f24; color:#e6e6e6; padding:14px 16px; border-radius:8px; overflow-x:auto; font-size:13.5px; line-height:1.5; }
+pre code { background:transparent; padding:0; color:inherit; font-size:1em; }
+blockquote { border-left:4px solid var(--border); margin:16px 0; padding:4px 16px; color:var(--muted); background:#fafbfc; border-radius:0 8px 8px 0; }
+table { border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px; }
+th,td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+th { background:#eef2f7; font-weight:600; }
+tr:nth-child(even) { background:#fafbfc; }
+ul,ol { margin:8px 0; padding-left:26px; }
+li { margin:4px 0; }
+.toc { background:#f0f4f9; border:1px solid var(--border); border-radius:10px; padding:16px 22px; margin:22px 0; }
+.toc strong { display:block; margin-bottom:8px; color:var(--accent); }
+.toc ul { list-style:none; padding-left:0; }
+.toc li { margin:3px 0; }
+.toc .l2 { padding-left:18px; font-size:.95em; }
+.toc .l3 { padding-left:36px; font-size:.9em; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
+.footer { text-align:center; color:var(--muted); font-size:13px; margin-top:40px; }
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>README</span></div></div>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#docs-文档与进展跟踪">docs/ —— 文档与进展跟踪</a></li><li class="l2"><a href="#说明文档">说明文档</a></li><li class="l2"><a href="#带时间戳的进展跟踪-核心">🧭 带时间戳的进展跟踪（核心）</a></li><li class="l2"><a href="#md-html-阅读转换">md→html 阅读转换</a></li></ul></div><h1>docs/ —— 文档与进展跟踪</h1>
+<p>本目录承载两类内容：<strong>说明文档</strong>与<strong>带时间戳的进展跟踪</strong>（机制来自 dk-incre）。</p>
+<h2>说明文档</h2>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REPRODUCE.md</code></td>
+<td>最短时间复现指南（命令 + 预期产物）</td>
+</tr>
+<tr>
+<td><code>MANIFEST.md</code></td>
+<td>资产清单（已纳入 / 外链 / 入口对照）</td>
+</tr>
+</tbody>
+</table>
+<h2>🧭 带时间戳的进展跟踪（核心）</h2>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>作用</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>PROGRESS.md</code></strong></td>
+<td>当前锚点：我在哪 / 已完成 / 下一步 / 待拍板</td>
+<td>每次有进展就<strong>覆盖更新</strong></td>
+</tr>
+<tr>
+<td><strong><code>logs/YYYYMMDD_HHMMSS_标题.md</code></strong></td>
+<td>时间轴：本次会话做了什么、背景、待办</td>
+<td>每次有进展就<strong>新增一条</strong></td>
+</tr>
+<tr>
+<td><code>LOG_CONVENTION.md</code></td>
+<td>过程文档约定（命名 / 模板 / 收尾动作）</td>
+<td>固化为规范</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>约定：每次推进后更新 <code>PROGRESS.md</code> 锚点，并新增一条 <code>docs/logs/</code> 时间戳记录。</p>
+</blockquote>
+<h2>md→html 阅读转换</h2>
+<ul>
+<li><strong>执行依据</strong>：<code>*.md</code>（可 diff、版本管理）</li>
+<li><strong>阅读用</strong>：<code>*.html</code>（同名同目录，渲染后更易读）</li>
+</ul>
+<pre><code class="language-bash">python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>--all-docs<span class="w">   </span><span class="c1"># 刷新 docs/ 下所有 md → html</span>
+python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>README.md
+</code></pre>
+<blockquote>
+<p>html 是生成物，不要手工编辑；改 md 后重新生成再一起提交。</p>
+</blockquote>
+</article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
+</body>
+</html>
