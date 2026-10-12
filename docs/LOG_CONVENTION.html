@@ -42,103 +42,57 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>LOG_CONVENTION</span></div></div>
-<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#过程文档约定-log-convention">过程文档约定（LOG CONVENTION）</a></li><li class="l2"><a href="#1-核心-两份文件">1. 核心：两份文件</a></li><li class="l2"><a href="#2-命名约定-带时间戳">2. 命名约定（带时间戳）</a></li><li class="l2"><a href="#3-引导提示模板-每条日志-锚点都要填">3. 引导提示模板（每条日志/锚点都要填）</a></li><li class="l2"><a href="#4-progress-md-必填字段">4. PROGRESS.md 必填字段</a></li><li class="l2"><a href="#5-每次收尾时的动作">5. 每次收尾时的动作</a></li><li class="l2"><a href="#6-为什么这么做">6. 为什么这么做</a></li><li class="l2"><a href="#7-md-与-html-的分工与生成">7. md 与 html 的分工与生成</a></li><li class="l3"><a href="#更新后的收尾动作-追加第-5-节条目-5">更新后的收尾动作（追加第 5 节条目 5）</a></li></ul></div><h1>过程文档约定（LOG CONVENTION）</h1>
-<blockquote>
-<p>目标：让每次打开项目都能<strong>秒懂「我在哪、上次到哪、下一步从哪继续」</strong>。
-适用：本仓库所有进行中的工作（调查、实现、复现、骨架搭建等）。
-机制来源：<code>dk-incre</code>（dk-incremental）实践沉淀而来。</p>
-</blockquote>
-<hr />
-<h2>1. 核心：两份文件</h2>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#过程文档约定">过程文档约定</a></li><li class="l2"><a href="#1-两份文件">1. 两份文件</a></li><li class="l2"><a href="#2-日志命名">2. 日志命名</a></li><li class="l2"><a href="#3-每条日志的小节">3. 每条日志的小节</a></li><li class="l2"><a href="#4-progress-md-的小节">4. PROGRESS.md 的小节</a></li><li class="l2"><a href="#5-收尾">5. 收尾</a></li></ul></div><h1>过程文档约定</h1>
+<p>目标：下次打开时能直接看到做到哪、从哪继续。</p>
+<h2>1. 两份文件</h2>
 <table>
 <thead>
 <tr>
 <th>文件</th>
 <th>作用</th>
-<th>更新频率</th>
+<th>更新方式</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>docs/PROGRESS.md</code></td>
-<td><strong>当前锚点</strong>：我在哪/已完成/下一步/待拍板</td>
-<td>每次有进展就<strong>覆盖更新</strong></td>
+<td>当前锚点</td>
+<td>有进展就覆盖</td>
 </tr>
 <tr>
 <td><code>docs/logs/YYYYMMDD_HHMMSS_标题.md</code></td>
-<td><strong>时间轴</strong>：这次会话做了什么、背景、待办</td>
-<td>每次有进展就<strong>新增一条</strong></td>
+<td>时间轴</td>
+<td>有进展就新增一条</td>
 </tr>
 </tbody>
 </table>
-<h2>2. 命名约定（带时间戳）</h2>
+<h2>2. 日志命名</h2>
 <ul>
-<li>日志文件：<code>docs/logs/&lt;YYYYMMDD&gt;_&lt;HHMMSS&gt;_&lt;简短标题&gt;.md</code></li>
-<li>示例：<code>20260922_125733_进展机制.md</code></li>
-<li>时间统一用本地时区，文件头部写明 <code># 过程日志：YYYY-MM-DD HH:MM:SS 时区</code>。</li>
+<li>路径：<code>docs/logs/&lt;YYYYMMDD&gt;_&lt;HHMMSS&gt;_&lt;简短标题&gt;.md</code></li>
+<li>时间用本地时区。文件第一行写 <code># 过程日志：YYYY-MM-DD HH:MM:SS 时区</code>。</li>
+<li><code>EXAMPLE_</code> 开头的文件是格式示例，不算正式记录。</li>
 </ul>
-<h2>3. 引导提示模板（每条日志/锚点都要填）</h2>
-<pre><code class="language-text">## 1. 本次做了什么      —— 简短列出本次动作（带时间点）
-## 2. 背景回顾          —— 回填一段上文，方便下次续接（分支、commit、上下文）
-## 3. 待办 / 下一步      —— 明确勾选式待办 + 指向「从哪个文件/哪一步继续」
-## 4. 可复用的关键路径    —— 常用文件/命令/分支，方便快速捡回上下文
-## 5. 遗留 / 注意        —— 未处理项、风险、需人工确认的内容
+<h2>3. 每条日志的小节</h2>
+<pre><code class="language-text">## 1. 本次做了什么
+## 2. 背景
+## 3. 下一步
+## 4. 关键路径
+## 5. 遗留
 </code></pre>
-<h2>4. PROGRESS.md 必填字段</h2>
-<pre><code class="language-text">⏱️ 最近更新    —— 时间 / 分支 / 本次做了什么
-📍 当前进度    —— 一句话，写着「正在做…等待…」
-✅ 已完成      —— 勾选式清单
-⏭️ 下一步      —— 明确要做的动作 / 待拍板项（给建议）
-🧭 快捷入口    —— 指向路线图/调查结论/日志
-🗒️ 过程日志    —— 时间轴表格（时间/分支/说明/文件名）
+<h2>4. PROGRESS.md 的小节</h2>
+<pre><code class="language-text">## 当前       一句话
+## 已完成     勾选清单
+## 下一步     接着做的动作
+## 关键路径   文件与命令
+## 时间线     指向 docs/logs/ 里最近几条
 </code></pre>
-<h2>5. 每次收尾时的动作</h2>
+<h2>5. 收尾</h2>
 <ol>
-<li>在 <code>docs/logs/</code> 新增一条本会话时间戳日志。</li>
-<li>覆盖更新 <code>docs/PROGRESS.md</code> 的「最近更新/当前进度/已完成/下一步/时间轴」。</li>
-<li>若改了 README 的入口说明，保持 <code>docs/PROGRESS.md</code> 链接可用。</li>
-<li>（可选）<code>git add docs/PROGRESS.md docs/logs/ &amp;&amp; git commit</code>，让进展跟随分支。</li>
+<li>在 <code>docs/logs/</code> 新增一条时间戳日志。</li>
+<li>覆盖 <code>docs/PROGRESS.md</code> 的当前、已完成、下一步、时间线。</li>
+<li>若改了 markdown，用 <code>python tools/md_to_html.py --all-docs</code> 刷新 html。需要时把 md 与 html 一起提交。</li>
 </ol>
-<h2>6. 为什么这么做</h2>
-<ul>
-<li><strong>时间戳</strong>：一眼看出记录新旧、辨别多次会话顺序。</li>
-<li><strong>引导提示</strong>：不用靠记忆，打开就能从「下一步」无缝继续。</li>
-<li><strong>锚点+时间轴分离</strong>：<code>PROGRESS</code> 看当前，<code>logs</code> 看历史，互不干扰。</li>
-</ul>
-<hr />
-<h2>7. md 与 html 的分工与生成</h2>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>文件</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>执行依据</strong></td>
-<td><code>*.md</code></td>
-<td>可 diff、版本管理、我执行时参考</td>
-</tr>
-<tr>
-<td><strong>阅读用</strong></td>
-<td><code>*.html</code>（同名）</td>
-<td>渲染后更轻松的阅读形式，你来看</td>
-</tr>
-</tbody>
-</table>
-<p>每次会话<strong>收尾/开始</strong>时，若 md 有改动，用 <code>tools/md_to_html.py --all-docs</code> 重新生成 html。</p>
-<pre><code class="language-bash">python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>--all-docs<span class="w">   </span><span class="c1"># 刷新 docs/ 下所有 md → html</span>
-python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>README.md<span class="w">    </span><span class="c1"># 根目录 README</span>
-</code></pre>
-<blockquote>
-<p>注意：html 是生成物，不要手工编辑；改内容改 md 再重新生成。</p>
-</blockquote>
-<h3>更新后的收尾动作（追加第 5 节条目 5）</h3>
-<ol start="5">
-<li>若 md 有改动，用 <code>tools/md_to_html.py --all-docs</code> 刷新 html，并一起 <code>git add</code>/commit。</li>
-</ol>
+<p>锚点只保留现在有用的信息；过程细节放进 <code>docs/logs/</code>。</p>
 </article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
 </body>
 </html>

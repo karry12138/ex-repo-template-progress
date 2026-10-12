@@ -1,6 +1,5 @@
-# 02_checkpoints — 训练产物 / adapter
+# 02_checkpoints — 检查点
 
-约定：把训练好的 checkpoints / adapter 放进这里（如 `<ADAPTER_NAME>/`），
-并让 `paths.env` 的 `ADAPTER_DIR` 指向它。
+训练或导出的权重放在这里，例如 `<CHECKPOINT_NAME>/`。`paths.env` 的 `CHECKPOINT_DIR` 指向要用的那一份。
 
-> .gitignore 已忽略 `lora_checkpoint/`；如需入库请按需移除或使用 Git LFS。
+`.gitignore` 默认忽略本目录下除 `README.md` 以外的内容。需要入库时再改忽略规则，或使用 Git LFS。

@@ -1,6 +1,7 @@
 # 03_data — 数据
 
-`data_index/` 存放数据索引 jsonl（full / traffic / conflict / train）。影像等原始数据通常不在仓库内，
-而放于 `06_external_links`，由 `paths.env` 的 `DATASET_IMAGES_*` 指向。
+`data_index/` 放索引文件（如 jsonl），由 `paths.env` 的 `DATA_INDEX` 指向主索引。更多索引用 `DATA_INDEX_<名字>` 追加。
 
-> 若 jsonl 内是绝对路径，迁移后要改 jsonl 或做目录映射。
+原始数据、模型权重等大文件放在 `06_external_links`（或仓库外的绝对路径），由 `DATA_DIR` / `MODEL_DIR` 指向。
+
+索引里若写了绝对路径，换机器后要改索引，或在新位置做同样的目录映射。

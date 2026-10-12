@@ -42,39 +42,32 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>PROGRESS</span></div></div>
-<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#进展入口-progress-压缩版续接锚点">进展入口（PROGRESS）—— 压缩版续接锚点</a></li><li class="l2"><a href="#操作安全守则">⚠️ 操作安全守则</a></li><li class="l2"><a href="#当前-一句话">📍 当前（一句话）</a></li><li class="l2"><a href="#已完成">已完成</a></li><li class="l2"><a href="#下一步-从哪继续">⏭️ 下一步（从哪继续）</a></li><li class="l2"><a href="#关键路径">🧭 关键路径</a></li><li class="l2"><a href="#时间线-近期关键">🗒️ 时间线（近期关键）</a></li></ul></div><h1>进展入口（PROGRESS）—— 压缩版续接锚点</h1>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#进展入口-progress">进展入口（PROGRESS）</a></li><li class="l2"><a href="#当前">当前</a></li><li class="l2"><a href="#已完成">已完成</a></li><li class="l2"><a href="#下一步">下一步</a></li><li class="l2"><a href="#关键路径">关键路径</a></li><li class="l2"><a href="#时间线">时间线</a></li></ul></div><h1>进展入口（PROGRESS）</h1>
 <blockquote>
-<p><strong>每次打开先看这个。</strong> 只保留当前锚点；历史在 <code>docs/logs/</code>。</p>
+<p>每次打开先看本文件。这里只留当前锚点，历史在 <code>docs/logs/</code>。</p>
 </blockquote>
-<h2>⚠️ 操作安全守则</h2>
-<blockquote>
-<p>需要 CUDA/大内存的实验：先停下、告诉用户、等释放算力再继续（曾因本地 VLLM 占满 GPU 阻塞）。</p>
-</blockquote>
-<h2>📍 当前（一句话）</h2>
-<blockquote>
-<p><strong>这是 <code>ex-repo-template-progress</code>（通用实验仓库模板 + 带时间戳进展跟踪）。骨架已就绪：可复现实验仓库目录已完成，并嵌入 <code>dk-incre</code> 的进展跟踪机制（<code>docs/PROGRESS.md</code> ← 本文件 + <code>docs/logs/YYYYMMDD_HHMMSS_标题.md</code> + <code>docs/LOG_CONVENTION.md</code> + <code>tools/md_to_html.py</code>）。下一步：从本骨架派生一个新实验仓库，替换 <code>&lt;...&gt;</code> 占位符。</strong></p>
-</blockquote>
+<h2>当前</h2>
+<p>模板仓库，尚未开始具体实验。派生新仓库后，用一句话写明正在做什么。</p>
 <h2>已完成</h2>
 <ul>
-<li>从 <code>dk-repo-template</code> 拷贝可复现实验仓库骨架（00_envs…work/docs）。</li>
-<li>嵌入进展跟踪机制：<code>docs/PROGRESS.md</code>（本锚点）、<code>docs/logs/</code>（时间轴）、<code>docs/LOG_CONVENTION.md</code>（约定）、<code>tools/md_to_html.py</code> + <code>tools/_html_style.css</code>（md→html）。</li>
-<li>清理骨架里的具体实验痕迹（.ipynb_checkpoints、work 空目录）。</li>
+<li>[ ] （尚无）</li>
 </ul>
-<h2>⏭️ 下一步（从哪继续）</h2>
+<h2>下一步</h2>
 <ul>
-<li>[ ] 用本模板 <code>cp -a ex-repo-template-progress &lt;新仓库&gt;</code> 派生新实验仓库。</li>
-<li>[ ] 新仓库内：改 <code>README.md</code> / <code>paths.env.example</code> / <code>docs/REPRODUCE.md</code> / <code>docs/MANIFEST.md</code> 的 <code>&lt;...&gt;</code> 占位符。</li>
-<li>[ ] <code>cp paths.env.example paths.env</code> 填本机实际路径 → <code>bash 04_entrypoints/check_all.sh</code> 验证。</li>
+<li>[ ] <code>cp -a</code> 本目录为新仓库，替换 <code>&lt;...&gt;</code> 占位符。</li>
+<li>[ ] <code>cp paths.env.example paths.env</code>，填本机路径。</li>
+<li>[ ] 编辑 <code>04_entrypoints/run_experiment.sh</code> 与 <code>run_smoke.sh</code>。</li>
+<li>[ ] <code>bash 04_entrypoints/check_all.sh</code>。</li>
 </ul>
-<h2>🧭 关键路径</h2>
+<h2>关键路径</h2>
 <ul>
-<li>骨架 <code>README.md</code> · 复现 <code>docs/REPRODUCE.md</code> · 清单 <code>docs/MANIFEST.md</code></li>
-<li>进展约定 <code>docs/LOG_CONVENTION.md</code> · 当前锚点 <code>docs/PROGRESS.md</code>（本文件）· 时间轴 <code>docs/logs/</code></li>
-<li>工具 <code>tools/md_to_html.py</code>（md→html）· 入口 <code>04_entrypoints/</code></li>
+<li>总览 <code>README.md</code></li>
+<li>复现 <code>docs/REPRODUCE.md</code> · 清单 <code>docs/MANIFEST.md</code> · 约定 <code>docs/LOG_CONVENTION.md</code></li>
+<li>入口 <code>04_entrypoints/</code> · 路径 <code>paths.env.example</code></li>
 </ul>
-<h2>🗒️ 时间线（近期关键）</h2>
+<h2>时间线</h2>
 <ul>
-<li>模板创建：骨架就绪 + 进展跟踪机制嵌入。</li>
+<li>格式示例：<code>docs/logs/EXAMPLE_日志格式示例.md</code>（开始实验后删除或替换）</li>
 </ul>
 </article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
 </body>

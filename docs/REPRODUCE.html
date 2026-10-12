@@ -42,114 +42,71 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>REPRODUCE</span></div></div>
-<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#最短时间复现指南-repo-name">最短时间复现指南（&lt;repo-name&gt;）</a></li><li class="l2"><a href="#目录结构">目录结构</a></li><li class="l2"><a href="#新机器-5-分钟就绪">新机器 5 分钟就绪</a></li><li class="l2"><a href="#复现命令-最短">复现命令（最短）</a></li><li class="l2"><a href="#两套环境说明">两套环境说明</a></li><li class="l2"><a href="#已完成结果-可直接对照-不必重跑">已完成结果（可直接对照，不必重跑）</a></li><li class="l2"><a href="#注意">注意</a></li></ul></div><h1>最短时间复现指南（<repo-name>）</h1>
-<p>本目录把实验相关资产整理成一份可迁移/可复现的包，涉及：</p>
-<table>
-<thead>
-<tr>
-<th>编号</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>&lt;实验 A 描述&gt;（如：noFLA sweep）</td>
-</tr>
-<tr>
-<td>B</td>
-<td>&lt;实验 B 描述&gt;（如：FLA sweep）</td>
-</tr>
-<tr>
-<td>C</td>
-<td>&lt;实验 C 描述&gt;（如：带 adapter 的推理/消融）</td>
-</tr>
-<tr>
-<td>D</td>
-<td>&lt;实验 D 描述&gt;（如：不带 adapter 的基座串行）</td>
-</tr>
-<tr>
-<td>E</td>
-<td>两套环境：<code>venv-base</code>（有加速库）/ <code>venv-nofla</code>（硬挡加速库）</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>本文件是模板。请把 <code>&lt;...&gt;</code> 占位符替换为你自己的实验内容与路径。</p>
-</blockquote>
-<h2>目录结构</h2>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#复现步骤-repo-name">复现步骤（`&lt;repo-name&gt;`）</a></li><li class="l2"><a href="#目录">目录</a></li><li class="l2"><a href="#新机器">新机器</a></li><li class="l2"><a href="#运行">运行</a></li><li class="l2"><a href="#环境">环境</a></li><li class="l2"><a href="#已有结果">已有结果</a></li><li class="l2"><a href="#注意">注意</a></li></ul></div><h1>复现步骤（<code>&lt;repo-name&gt;</code>）</h1>
+<p>把 <code>&lt;...&gt;</code> 换成实际实验名称与路径。资产清单见 <code>docs/MANIFEST.md</code>。</p>
+<h2>目录</h2>
 <pre><code>&lt;repo&gt;/
-  00_envs/           venv-base + venv-nofla(thin) + 依赖冻结
-  01_code/           &lt;SWEEP_PKG&gt; + &lt;MAIN_PKG&gt;(+ 测试脚本)
-  02_checkpoints/    &lt;ADAPTER_NAME&gt; adapter
-  03_data/data_index jsonl（full / traffic / conflict / train）
-  04_entrypoints/    check / run / pack / fixup
-  05_results/        已跑完的 报告 + JSON + base 结果
-  06_external_links/ 模型与影像的 symlink（或 full pack 实体）
-  work/              复现时写入 outputs/logs/reports（自动创建）
+  00_envs/            venv + 依赖冻结清单
+  01_code/            &lt;PKG&gt;
+  02_checkpoints/     &lt;CHECKPOINT_NAME&gt;
+  03_data/data_index/ 数据索引
+  04_entrypoints/     check / run / pack / fixup
+  05_results/         已完成结果
+  06_external_links/  模型与数据（symlink，或 --full 后的实体）
+  work/               运行时输出（自动创建）
   paths.env.example
   docs/
 </code></pre>
-<h2>新机器 5 分钟就绪</h2>
-<pre><code class="language-bash"><span class="c1"># 1) 放到目标机</span>
-rsync<span class="w"> </span>-aP<span class="w"> </span>&lt;repo&gt;/<span class="w"> </span>NEWHOST:~/&lt;repo&gt;/
+<h2>新机器</h2>
+<pre><code class="language-bash">rsync<span class="w"> </span>-aP<span class="w"> </span>&lt;repo&gt;/<span class="w"> </span>NEWHOST:~/&lt;repo&gt;/
 
-<span class="c1"># 若要完全离线自包含（请按需调整体积）：</span>
-<span class="c1"># bash 04_entrypoints/pack_for_migration.sh --full --dest /media/usb/&lt;repo&gt;</span>
+<span class="c1"># 需要离线自包含时：</span>
+<span class="c1"># bash 04_entrypoints/pack_for_migration.sh --full --dest /path/to/&lt;repo&gt;</span>
 
-<span class="c1"># 2) 进入目录</span>
 <span class="nb">cd</span><span class="w"> </span>~/&lt;repo&gt;
-cp<span class="w"> </span>paths.env.example<span class="w"> </span>paths.env<span class="w">   </span><span class="c1"># 必要改 MODEL / 影像路径</span>
+cp<span class="w"> </span>paths.env.example<span class="w"> </span>paths.env<span class="w">    </span><span class="c1"># 修改 MODEL_DIR、DATA_DIR、VENV 等</span>
 
-<span class="c1"># 3) 修正 venv-nofla -&gt; venv-base 链接</span>
-bash<span class="w"> </span>04_entrypoints/fixup_venvs.sh
-
-<span class="c1"># 4) 一键检查</span>
+bash<span class="w"> </span>04_entrypoints/fixup_venv.sh
 bash<span class="w"> </span>04_entrypoints/check_all.sh
 </code></pre>
-<blockquote>
-<p>若数据索引（jsonl）里是绝对路径，迁移后需改 jsonl 或做目录映射（如把旧路径 symlink 到新位置）。</p>
-</blockquote>
-<h2>复现命令（最短）</h2>
-<pre><code class="language-bash">bash<span class="w"> </span>04_entrypoints/run_experiment.sh<span class="w">          </span><span class="c1"># 主流水线（模板内为 TODO）</span>
-<span class="nv">MAX_SAMPLES</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>bash<span class="w"> </span>04_entrypoints/run_smoke.sh<span class="w"> </span><span class="c1"># 小样本冒烟</span>
+<p>数据索引里的绝对路径在迁移后要改写，或把旧路径映射到新位置。</p>
+<h2>运行</h2>
+<pre><code class="language-bash">bash<span class="w"> </span>04_entrypoints/run_smoke.sh
+bash<span class="w"> </span>04_entrypoints/run_experiment.sh
 </code></pre>
-<blockquote>
-<p>注：实际命令请替换 <code>04_entrypoints/</code> 下对应实验的 run_*.sh（见 docs/MANIFEST.md「入口对照」）。</p>
-</blockquote>
-<h2>两套环境说明</h2>
+<p>模板里的运行脚本只有占位命令，先按实验改 <code>04_entrypoints/run_*.sh</code>。</p>
+<h2>环境</h2>
 <table>
 <thead>
 <tr>
-<th>Env</th>
+<th>项</th>
 <th>路径</th>
-<th>用途</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>有加速库</strong></td>
-<td><code>00_envs/venv-base</code></td>
-<td>主要实验</td>
+<td>虚拟环境</td>
+<td><code>00_envs/venv</code></td>
 </tr>
 <tr>
-<td><strong>无加速库</strong></td>
-<td><code>00_envs/venv-nofla</code></td>
-<td>基座串行；<code>sitecustomize.py</code> 对加速库直接 <code>ImportError</code>；python 指向 venv-base</td>
+<td>解释器</td>
+<td><code>paths.env</code> 的 <code>PYTHON_BIN</code></td>
+</tr>
+<tr>
+<td>依赖冻结</td>
+<td><code>00_envs/venv.pip.freeze.txt</code>、<code>venv.key_versions.txt</code></td>
 </tr>
 </tbody>
 </table>
-<p>关键版本见 <code>00_envs/venv-base.key_versions.txt</code> 与 <code>venv-base.pip.freeze.txt</code>。</p>
-<h2>已完成结果（可直接对照，不必重跑）</h2>
+<h2>已有结果</h2>
 <ul>
-<li><code>05_results/&lt;RUN_TAG&gt;/</code>（JSON + 报告）</li>
-<li><code>05_results/&lt;COMBINED_REPORT&gt;</code></li>
+<li><code>05_results/&lt;RUN_TAG&gt;/</code></li>
 </ul>
 <h2>注意</h2>
 <ol>
-<li>统一脚本内可能有本机默认路径；entrypoint 会把 <code>EXP_ROOT</code> 指到 <code>work/</code> 并 symlink 代码/adapter/data。</li>
-<li>若脚本写死旧路径，以 <code>paths.env</code> 导出的环境变量为准（脚本使用 <code>${VAR:-...}</code> 或 export 覆盖）。若遇硬编码，改对应运行脚本顶部的路径块。</li>
-<li>换 GPU / 架构要重装对应编译的 wheel（如 <code>causal_conv1d</code>）。</li>
+<li>入口脚本把 <code>EXP_ROOT</code> 指到 <code>work/</code>，并 symlink 代码、检查点、数据索引。</li>
+<li>业务脚本里的路径优先用 <code>paths.env</code> 导出的变量。发现写死的旧路径时，改对应脚本顶部。</li>
+<li>带本机编译扩展的环境，换机器或换架构后通常需要重装，不能只拷贝 <code>venv</code>。</li>
 </ol>
 </article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
 </body>

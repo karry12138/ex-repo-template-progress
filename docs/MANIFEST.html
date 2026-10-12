@@ -42,9 +42,9 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>MANIFEST</span></div></div>
-<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#资产清单-manifest">资产清单 MANIFEST</a></li><li class="l2"><a href="#已纳入-实体拷贝">已纳入（实体拷贝）</a></li><li class="l2"><a href="#外链-轻量包为-symlink-full-才拷贝">外链（轻量包为 symlink；`--full` 才拷贝）</a></li><li class="l2"><a href="#入口对照">入口对照</a></li><li class="l2"><a href="#官方-master-tag-结果">官方 master tag（结果）</a></li></ul></div><h1>资产清单 MANIFEST</h1>
-<p>生成时间：见包内文件 mtime。来源机：&lt;SOURCE_MACHINE&gt;。<repo-name> 收录了以下资产。</p>
-<h2>已纳入（实体拷贝）</h2>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#资产清单">资产清单</a></li><li class="l2"><a href="#已纳入">已纳入</a></li><li class="l2"><a href="#外链-light-包为-symlink-full-才拷贝实体">外链（light 包为 symlink；`--full` 才拷贝实体）</a></li><li class="l2"><a href="#入口">入口</a></li></ul></div><h1>资产清单</h1>
+<p>派生新仓库后填写。来源机器：<code>&lt;SOURCE_MACHINE&gt;</code>。仓库名：<code>&lt;repo-name&gt;</code>。</p>
+<h2>已纳入</h2>
 <table>
 <thead>
 <tr>
@@ -54,107 +54,89 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 </thead>
 <tbody>
 <tr>
-<td><code>01_code/&lt;SWEEP_PKG&gt;/</code></td>
-<td>主 sweep / 报告脚本</td>
+<td><code>01_code/&lt;PKG&gt;/</code></td>
+<td>源码</td>
 </tr>
 <tr>
-<td><code>01_code/&lt;MAIN_PKG&gt;/</code></td>
-<td>主用途 + 测试入口</td>
+<td><code>02_checkpoints/&lt;CHECKPOINT_NAME&gt;/</code></td>
+<td>检查点（若选择入库）</td>
 </tr>
 <tr>
-<td><code>02_checkpoints/&lt;ADAPTER_NAME&gt;/</code></td>
-<td>adapter</td>
+<td><code>03_data/data_index/</code></td>
+<td>数据索引</td>
 </tr>
 <tr>
-<td><code>03_data/data_index/*.jsonl</code></td>
-<td>full / traffic / conflict / train 索引</td>
+<td><code>00_envs/venv.pip.freeze.txt</code></td>
+<td>依赖冻结</td>
 </tr>
 <tr>
-<td><code>00_envs/venv-nofla/</code></td>
-<td>无加速库薄环境（挡 import）</td>
-</tr>
-<tr>
-<td><code>00_envs/venv-base.pip.freeze.txt</code></td>
-<td>完整 pip freeze</td>
-</tr>
-<tr>
-<td><code>00_envs/venv-base.key_versions.txt</code></td>
+<td><code>00_envs/venv.key_versions.txt</code></td>
 <td>关键包版本</td>
 </tr>
 <tr>
 <td><code>05_results/&lt;RUN_TAG&gt;/</code></td>
-<td>已跑完结果</td>
+<td>已完成结果</td>
 </tr>
 <tr>
 <td><code>04_entrypoints/</code></td>
-<td>检查 / 复现 / 打包入口</td>
+<td>检查、运行、打包</td>
 </tr>
 </tbody>
 </table>
-<h2>外链（轻量包为 symlink；<code>--full</code> 才拷贝）</h2>
+<h2>外链（light 包为 symlink；<code>--full</code> 才拷贝实体）</h2>
 <table>
 <thead>
 <tr>
 <th>链接</th>
 <th>源路径</th>
-<th>约大小</th>
+<th>大约体积</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>00_envs/venv-base</code></td>
-<td><code>&lt;ABS_VENV_BASE_PATH&gt;</code></td>
-<td>请填写</td>
+<td><code>00_envs/venv</code></td>
+<td><code>&lt;ABS_VENV_PATH&gt;</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>06_external_links/&lt;MODEL_NAME&gt;</code></td>
 <td><code>&lt;ABS_MODEL_PATH&gt;</code></td>
-<td>请填写</td>
+<td></td>
 </tr>
 <tr>
-<td><code>06_external_links/&lt;DATASET_TRAFFIC&gt;</code></td>
-<td><code>&lt;ABS_DATASET_TRAFFIC_PATH&gt;</code></td>
-<td>请填写</td>
-</tr>
-<tr>
-<td><code>06_external_links/&lt;DATASET_CONFLICT&gt;</code></td>
-<td><code>&lt;ABS_DATASET_CONFLICT_PATH&gt;</code></td>
-<td>请填写</td>
+<td><code>06_external_links/&lt;DATASET_NAME&gt;</code></td>
+<td><code>&lt;ABS_DATA_PATH&gt;</code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2>入口对照</h2>
+<h2>入口</h2>
 <table>
 <thead>
 <tr>
-<th>实验</th>
+<th>用途</th>
 <th>命令</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>主实验</td>
-<td><code>04_entrypoints/run_experiment.sh</code></td>
+<td><code>bash 04_entrypoints/run_experiment.sh</code></td>
 </tr>
 <tr>
 <td>冒烟</td>
-<td><code>04_entrypoints/run_smoke.sh</code></td>
+<td><code>bash 04_entrypoints/run_smoke.sh</code></td>
 </tr>
 <tr>
-<td>环境检查</td>
-<td><code>04_entrypoints/check_all.sh</code></td>
+<td>检查</td>
+<td><code>bash 04_entrypoints/check_all.sh</code></td>
 </tr>
 <tr>
-<td>迁移打包</td>
-<td><code>04_entrypoints/pack_for_migration.sh [--full]</code></td>
+<td>打包</td>
+<td><code>bash 04_entrypoints/pack_for_migration.sh [--full]</code></td>
 </tr>
 </tbody>
 </table>
-<h2>官方 master tag（结果）</h2>
-<ul>
-<li>&lt;RUN_TAG_A&gt;</li>
-<li>&lt;RUN_TAG_B&gt;</li>
-</ul>
 </article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
 </body>
 </html>

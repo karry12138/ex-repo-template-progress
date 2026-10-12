@@ -1,9 +1,8 @@
-# 01_code — 源码仓
+# 01_code — 源码
 
-约定：
+放实验代码。可以是一个包，也可以是多个并列目录。
 
-- <SWEEP_PKG>：主 sweep / 报告脚本包（如 HiPruneMixKV 60 组 sweep）。
-- <MAIN_PKG>：主用途包（如 hyperlora-simplified），内可含测试脚本（qwenBaseTest 等）。
-- 每个子包可自带 requirements / README。
+- `<PKG>`：主代码目录。`paths.env` 的 `CODE_ROOT` 指向它。
+- 其他包用 `CODE_ROOT_<名字>` 追加。`_common.sh` 会把这些目录 symlink 到 `work/`。
 
-> `04_entrypoints/_common.sh` 会把 `PKG_ROOT` / `QTY_ROOT` symlink 进 `work/`，供脚本以约定路径访问。
+各子目录可自带 `README` 与依赖说明。

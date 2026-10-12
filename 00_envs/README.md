@@ -1,12 +1,9 @@
 # 00_envs — Python 环境
 
-约定（参考 dk-experiment-reproduce）：
+- `venv`：主环境。体积通常较大，默认用 symlink 指向仓库外；需要离线整包时用 `pack_for_migration.sh --full` 拷贝实体。
+- `venv.pip.freeze.txt`：`pip freeze` 结果，体积小，可入库。
+- `venv.key_versions.txt`：关键包版本摘要，可入库。
 
-- `venv-base`：含全部加速库（如 fla / causal_conv1d）的主环境。通常体积大，默认以 symlink 指向外部，
-  或用 `pack_for_migration.sh --full` 拷贝实体。
-- `venv-nofla`：用来「硬挡」加速库的薄环境。`sitecustomize.py` 对相关包直接抛 `ImportError`；
-  python 经 `fixup_venvs.sh` 复用 venv-base 的二进制。
-- `venv-base.pip.freeze.txt`：完整 pip freeze（可入库，体积小）。
-- `venv-base.key_versions.txt`：关键包版本一览。
+需要第二套环境时，在本目录另放一份，并在 `paths.env` 增加对应变量。`.gitignore` 忽略 `venv/`；冻结清单不受影响。
 
-> .gitignore 已忽略 `venv/` 目录；若要入库，只保留冻结清单与 nofla 薄环境的 pyvenv.cfg。
+换机器后若实体环境的 `pyvenv.cfg` 失效，运行 `bash 04_entrypoints/fixup_venv.sh`。

@@ -42,9 +42,8 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 </head>
 <body>
 <div class="topbar"><div class="topbar-inner"><span class="br">MD→HTML</span><span>README</span></div></div>
-<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#docs-文档与进展跟踪">docs/ —— 文档与进展跟踪</a></li><li class="l2"><a href="#说明文档">说明文档</a></li><li class="l2"><a href="#带时间戳的进展跟踪-核心">🧭 带时间戳的进展跟踪（核心）</a></li><li class="l2"><a href="#md-html-阅读转换">md→html 阅读转换</a></li></ul></div><h1>docs/ —— 文档与进展跟踪</h1>
-<p>本目录承载两类内容：<strong>说明文档</strong>与<strong>带时间戳的进展跟踪</strong>（机制来自 dk-incre）。</p>
-<h2>说明文档</h2>
+<div class="wrap"><article><div class="toc"><strong>目录</strong><ul><li ><a href="#docs-说明与进展">docs/ — 说明与进展</a></li><li class="l2"><a href="#说明">说明</a></li><li class="l2"><a href="#进展">进展</a></li><li class="l2"><a href="#markdown-与-html">Markdown 与 HTML</a></li></ul></div><h1>docs/ — 说明与进展</h1>
+<h2>说明</h2>
 <table>
 <thead>
 <tr>
@@ -55,55 +54,46 @@ hr { border:0; border-top:1px solid var(--border); margin:30px 0; }
 <tbody>
 <tr>
 <td><code>REPRODUCE.md</code></td>
-<td>最短时间复现指南（命令 + 预期产物）</td>
+<td>换机后的最短复现步骤</td>
 </tr>
 <tr>
 <td><code>MANIFEST.md</code></td>
-<td>资产清单（已纳入 / 外链 / 入口对照）</td>
+<td>已纳入、外链、入口命令对照</td>
+</tr>
+<tr>
+<td><code>LOG_CONVENTION.md</code></td>
+<td>进展记录怎么写</td>
 </tr>
 </tbody>
 </table>
-<h2>🧭 带时间戳的进展跟踪（核心）</h2>
+<h2>进展</h2>
 <table>
 <thead>
 <tr>
 <th>文件</th>
 <th>作用</th>
-<th>更新频率</th>
+<th>何时更新</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong><code>PROGRESS.md</code></strong></td>
-<td>当前锚点：我在哪 / 已完成 / 下一步 / 待拍板</td>
-<td>每次有进展就<strong>覆盖更新</strong></td>
+<td><code>PROGRESS.md</code></td>
+<td>当前锚点：做到哪、下一步</td>
+<td>有进展就覆盖</td>
 </tr>
 <tr>
-<td><strong><code>logs/YYYYMMDD_HHMMSS_标题.md</code></strong></td>
-<td>时间轴：本次会话做了什么、背景、待办</td>
-<td>每次有进展就<strong>新增一条</strong></td>
-</tr>
-<tr>
-<td><code>LOG_CONVENTION.md</code></td>
-<td>过程文档约定（命名 / 模板 / 收尾动作）</td>
-<td>固化为规范</td>
+<td><code>logs/YYYYMMDD_HHMMSS_标题.md</code></td>
+<td>这一次做了什么</td>
+<td>有进展就新增一条</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>约定：每次推进后更新 <code>PROGRESS.md</code> 锚点，并新增一条 <code>docs/logs/</code> 时间戳记录。</p>
-</blockquote>
-<h2>md→html 阅读转换</h2>
-<ul>
-<li><strong>执行依据</strong>：<code>*.md</code>（可 diff、版本管理）</li>
-<li><strong>阅读用</strong>：<code>*.html</code>（同名同目录，渲染后更易读）</li>
-</ul>
-<pre><code class="language-bash">python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>--all-docs<span class="w">   </span><span class="c1"># 刷新 docs/ 下所有 md → html</span>
+<p><code>logs/EXAMPLE_日志格式示例.md</code> 只示范格式，开始记录后可以删掉。</p>
+<h2>Markdown 与 HTML</h2>
+<p>改 md 后重新生成 html，再一起提交。html 不要手改。</p>
+<pre><code class="language-bash">python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>--all-docs
 python<span class="w"> </span>tools/md_to_html.py<span class="w"> </span>README.md
 </code></pre>
-<blockquote>
-<p>html 是生成物，不要手工编辑；改 md 后重新生成再一起提交。</p>
-</blockquote>
 </article><div class="footer">由 md_to_html.py 生成 · 阅读用 · 原始 markdown 仍为执行依据</div></div>
 </body>
 </html>

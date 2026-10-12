@@ -1,39 +1,39 @@
 # ==========================================================================
-#  <repo-name>  .gitignore
-#  原则：只入库「源码 + 数据索引 + 进展文档」，不入库「训练产物 / 运行日志 / 缓存/环境」
-#  （继承自 dk-experiment-reproduce / dk-multi / dk-incre 兄弟项目的约定）
+#  .gitignore
+#  入库：源码、数据索引、说明与进展文档。
+#  不入库：检查点、运行产物、缓存、虚拟环境、本地路径配置。
 # ==========================================================================
 
-# ---- 运行工作区（_common.sh 自动创建并 symlink adapter/data/代码）----
-# 具体运行时生成目录/链接统一忽略，但保留 work/README.md
+# ---- 运行工作区（_common.sh 自动创建）----
 work/outputs/
 work/logs/
 work/reports/
 work/tmp/
 work/data_index/
-work/lora_checkpoint/
+work/checkpoints/
 work/*
 !work/README.md
 
-# ---- 本地实际配置（保留模板 paths.env.example，不入库 paths.env）----
+# ---- 本地路径（保留 paths.env.example）----
 paths.env
 !paths.env.example
 
-# ---- 环境（venv 通常不入库，仅保留符号链接/冻结清单）----
+# ---- 虚拟环境（体积大，通常是 symlink；冻结清单可入库）----
 venv/
 .venv/
 env/
-00_envs/venv-base
-00_envs/venv-base/
+00_envs/venv
+00_envs/venv/
 
-# ---- 重型外部资产（模型/影像，通常 symlink）----
+# ---- 重型外部资产 ----
 06_external_links/*
 !06_external_links/README.md
 
-# ---- 训练产物 / 检查点（大、可重生成）----
-lora_checkpoint/
+# ---- 检查点（大、可再生成；需要入库时改这里或用 Git LFS）----
+02_checkpoints/*
+!02_checkpoints/README.md
 
-# ---- Jupyter 自动备份 ----
+# ---- Jupyter ----
 .ipynb_checkpoints/
 
 # ---- Python ----
@@ -50,7 +50,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# ---- 本地/私有配置（如需保留模板，请改用 *.example）----
+# ---- 本地私有配置 ----
 .env
 .env.*
 !.env.example
